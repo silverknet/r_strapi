@@ -4,7 +4,8 @@
   "info": {
     "singularName": "nyhet",
     "pluralName": "nyhets",
-    "displayName": "Nyhet"
+    "displayName": "Nyhet",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -28,6 +29,14 @@
     },
     "rank": {
       "type": "integer"
+    },
+    "Bild": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
     }
   }
 }
