@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "nyhets",
+  "info": {
+    "singularName": "nyhet",
+    "pluralName": "nyhets",
+    "displayName": "Nyhet"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "Beskrivning": {
+      "type": "richtext",
+      "required": true
+    },
+    "Datum": {
+      "type": "date",
+      "required": true
+    },
+    "url": {
+      "type": "string"
+    },
+    "rank": {
+      "type": "integer"
+    }
+  }
+}

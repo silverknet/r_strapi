@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "styrelsemedlems",
+  "info": {
+    "singularName": "styrelsemedlem",
+    "pluralName": "styrelsemedlems",
+    "displayName": "Styrelsemedlem"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Mejladress": {
+      "type": "email",
+      "required": true
+    },
+    "Forefternamn": {
+      "type": "string",
+      "required": true
+    },
+    "Roll": {
+      "type": "string",
+      "required": true
+    },
+    "Telefonnummer": {
+      "type": "string",
+      "required": true
+    },
+    "rank": {
+      "type": "integer",
+      "required": false
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

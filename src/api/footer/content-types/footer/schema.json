@@ -1,0 +1,25 @@
+{
+  "kind": "singleType",
+  "collectionName": "footers",
+  "info": {
+    "singularName": "footer",
+    "pluralName": "footers",
+    "displayName": "Footer"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Left": {
+      "type": "richtext",
+      "required": true
+    },
+    "Center": {
+      "type": "richtext"
+    },
+    "Right": {
+      "type": "richtext"
+    }
+  }
+}
