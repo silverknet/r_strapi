@@ -15,26 +15,33 @@ module.exports = ({ env }) => ({
 });
 */
 
-module.exports = ({ env }) => ({
-  connection: {
-    client: 'postgres',
+module.exports = ({ env }) => {
+  // `strapi develop` → NODE_ENV=development → SSL off (local Docker Postgres has no TLS).
+  // `strapi start` on Railway → NODE_ENV=production → SSL on for managed Postgres.
+  // Override with DATABASE_SSL=true|false when needed.
+  const sslDefault = env('NODE_ENV', 'development') === 'production';
+
+  return {
     connection: {
-      host: env('PGHOST', '127.0.0.1'),
-      port: env.int('PGPORT', 5432),
-      database: env('PGDATABASE', 'strapi'),
-      user: env('PGUSER', 'strapi'),
-      password: env('PGPASSWORD', 'password'),
-      ssl: env.bool(true),
+      client: 'postgres',
+      connection: {
+        host: env('PGHOST', '127.0.0.1'),
+        port: env.int('PGPORT', 5432),
+        database: env('PGDATABASE', 'strapi'),
+        user: env('PGUSER', 'strapi'),
+        password: env('PGPASSWORD', 'password'),
+        ssl: env.bool('DATABASE_SSL', sslDefault),
+      },
+      acquireConnectionTimeout: 5000,
+      pool: {
+        min: 0,
+        max: 10,
+        createTimeoutMillis: 8000,
+        acquireTimeoutMillis: 8000,
+        idleTimeoutMillis: 8000,
+        reapIntervalMillis: 1000,
+        createRetryIntervalMillis: 100,
+      },
     },
-    acquireConnectionTimeout: 5000,
-    pool: {
-      min: 0,
-      max: 10,
-      createTimeoutMillis: 8000,
-      acquireTimeoutMillis: 8000,
-      idleTimeoutMillis: 8000,
-      reapIntervalMillis: 1000,
-      createRetryIntervalMillis: 100,
-    }
-  },
-});
+  };
+};

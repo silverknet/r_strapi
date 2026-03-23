@@ -1,11 +1,48 @@
 'use strict';
 
 module.exports = {
+  /**
+   * Fetches the single newest post on the Page feed (limit=1) and logs it.
+   */
+  async testLatestFacebookPost() {
+    const access_token = process.env.FACEBOOK_API_TOKEN;
+    const page_id = process.env.FACEBOOK_PAGE_ID;
+
+    if (!access_token || !page_id) {
+      const msg = 'Missing FACEBOOK_API_TOKEN or FACEBOOK_PAGE_ID';
+      strapi.log.error(msg);
+      return { ok: false, error: msg };
+    }
+
+    const fields = 'id,message,full_picture,created_time,status_type';
+    const url =
+      `https://graph.facebook.com/${page_id}/feed?fields=${fields}&limit=1&access_token=${access_token}`;
+
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+
+      if (!res.ok) {
+        strapi.log.error('[test-latest-facebook] Graph API error:', res.status, data);
+        return { ok: false, status: res.status, error: data };
+      }
+
+      const post = data?.data?.[0] ?? null;
+      strapi.log.info('[test-latest-facebook] Newest page post:');
+      strapi.log.info(JSON.stringify(post ?? data, null, 2));
+
+      return { ok: true, post, raw: data };
+    } catch (err) {
+      strapi.log.error('[test-latest-facebook] Fetch failed:', err);
+      return { ok: false, error: String(err) };
+    }
+  },
+
   async updateNewsForce() {
 
     const allExistingNews = await strapi.db.query('api::nyhet.nyhet').findMany({
         where: {},  // no filter → get all
-        select: ['id', 'title', 'createdAt'], // only these fields
+        select: ['id', 'title', 'createdAt'],
     });
 
     strapi.log.info(`update news`);

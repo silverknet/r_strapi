@@ -1,3 +1,4 @@
+'use strict';
 
 const status_type = Object.freeze({
   ADDED_PHOTOS: "added_photos",
@@ -14,18 +15,20 @@ const status_type = Object.freeze({
   WALL_POST: "wall_post",
 });
 
-export async function addNews(news_data){
+async function addNews(news_data) {
+  const allExistingNews = await strapi.db.query('api::nyhet.nyhet').findMany({
+    where: {},
+    select: ['facebook_post_id'],
+  });
 
-    const allExistingNews = await strapi.db.query('api::nyhet.nyhet').findMany({
-        where: {}, 
-        select: ['facebook_post_id'],
-    });
-
-    const newArticle = await strapi.db.query('api::article.article').create({
-    data: {
-        title: news_data.title ?? "Uppdatering från facebook",
-        beskrivning: ",
-        bild: news_data.full_picture ??
-    },
-    });
+  return {
+    existingNewsCount: allExistingNews.length,
+    newsData: news_data,
+    statusTypes: status_type,
+  };
 }
+
+module.exports = {
+  addNews,
+  status_type,
+};
