@@ -31,12 +31,18 @@
       "type": "integer"
     },
     "Bild": {
-      "allowedTypes": [
-        "images"
-      ],
       "type": "media",
       "multiple": false,
-      "required": true
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "facebook_post_id": {
+      "type": "integer"
+    },
+    "Plats": {
+      "type": "string"
     }
   }
 }
