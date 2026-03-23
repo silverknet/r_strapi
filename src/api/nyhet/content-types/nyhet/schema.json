@@ -39,7 +39,7 @@
       ]
     },
     "facebook_post_id": {
-      "type": "integer"
+      "type": "string"
     },
     "Plats": {
       "type": "string"

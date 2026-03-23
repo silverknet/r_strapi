@@ -8,6 +8,7 @@
     "develop:clean": "rm -rf .cache && strapi develop",
     "start": "strapi start",
     "build": "strapi build",
+    "forcenews": "node scripts/force-news.js",
     "strapi": "strapi",
     "db:up": "docker compose up -d",
     "db:down": "docker compose down",
