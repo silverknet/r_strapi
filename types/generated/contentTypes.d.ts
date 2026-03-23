@@ -584,7 +584,7 @@ export interface ApiNyhetNyhet extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     Datum: Schema.Attribute.Date & Schema.Attribute.Required;
-    facebook_post_id: Schema.Attribute.Integer;
+    facebook_post_id: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::nyhet.nyhet'> &
       Schema.Attribute.Private;
