@@ -8,7 +8,6 @@ function normalizeFacebookPostId(value) {
   if (value === null || value === undefined) {
     return '';
   }
-
   return String(value).trim();
 }
 
@@ -97,7 +96,6 @@ function extractMetadataLine(line, labels) {
 
   return null;
 }
-
 function extractFirstSentence(message) {
   const match = message.match(/.+?[.!?](?=\s|$)/s);
 
@@ -177,7 +175,6 @@ function extractNewsContentFromMessage(message, tag, fallbackDate) {
     place: metadata.place || null,
   };
 }
-
 async function buildExistingFacebookIdSet(strapi) {
   const allExistingNews = await strapi.db.query('api::nyhet.nyhet').findMany({
     where: {
