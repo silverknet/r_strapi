@@ -21,8 +21,7 @@
       "required": true
     },
     "Datum": {
-      "type": "date",
-      "required": true
+      "type": "datetime"
     },
     "url": {
       "type": "string"
@@ -39,7 +38,7 @@
       ]
     },
     "facebook_post_id": {
-      "type": "integer"
+      "type": "string"
     },
     "Plats": {
       "type": "string"
